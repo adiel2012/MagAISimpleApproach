@@ -16,7 +16,7 @@
     <a href="#">.netcore 3.1</a>
      <ul>
         <li>
-           <a href="#">sub d</a>
+           <a href="#">dotnet add package Microsoft.ML.OnnxRuntime</a>
         </li>
       </ul>
     </li>
