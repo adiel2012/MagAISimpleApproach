@@ -28,3 +28,6 @@
       </ul>
     </li>
  </ul>
+ <br/>
+ <b>Run XOR Project</b>
+python 
