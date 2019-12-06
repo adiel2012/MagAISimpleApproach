@@ -6,10 +6,10 @@
     <a href="#">Python 3.6.8</a>
      <ul>
         <li>
-            <a href="#">pip install tensorflow==1.14</a>  <br/>   
+            <a href="#">pip install tensorflow==1.14</a>
         </li>
          <li>
-            <a href="#">pip install onnxruntime</a><br/>
+            <a href="#">pip install onnxruntime</a>
          </li>
          <li>
             <a href="#">pip install -U tf2onnx</a>
@@ -20,8 +20,10 @@
     <a href="#">.netcore 3.1</a>
      <ul>
         <li>
-           <a href="#">dotnet add package Microsoft.ML.OnnxRuntime</a></br>
-           <a href="#">dotnet add package System.Drawing.Common</a>
+           <a href="#">dotnet add package Microsoft.ML.OnnxRuntime</a>
+        </li>
+        <li>
+           <a href="#">dotnet add package System.Drawing.Common(in examples with images)</a>
         </li>
       </ul>
     </li>
