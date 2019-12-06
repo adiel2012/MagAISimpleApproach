@@ -3,7 +3,7 @@
 <label>Prerequisites</label>
 <ul>  
     <li>
-    <a href="#">Python 3.6.8/a>
+    <a href="#">Python 3.6.8</a>
      <ul>
         <li>
            <a href="#">sub d</a>
@@ -11,7 +11,7 @@
       </ul>
     </li>
     <li>
-    <a href="#">.netcore 3.1/a>
+    <a href="#">.netcore 3.1</a>
      <ul>
         <li>
            <a href="#">sub d</a>
