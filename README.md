@@ -2,6 +2,20 @@
 
 <label>Prerequisites</label>
 <ul>  
-  <li>python 3.6.8</li>
-  <li>.netcore 3.1</li>
+    <li>
+    <a href="#">Python 3.6.8/a>
+     <ul>
+        <li>
+           <a href="#">sub d</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+    <a href="#">.netcore 3.1/a>
+     <ul>
+        <li>
+           <a href="#">sub d</a>
+        </li>
+      </ul>
+    </li>
  </ul>
