@@ -29,6 +29,6 @@
     </li>
  </ul>
  <br/>
- <b>Run XOR Project</b>
- cd pythonexamples</br>
+ <b>Run XOR Project</b><br/>
+ cd pythonexamples<br/>
  python ./xor.py
