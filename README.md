@@ -7,7 +7,8 @@
      <ul>
         <li>
             <a href="#">pip install tensorflow==1.14</a>          
-
+            <a href="#">pip install onnxruntime</a>
+            <a href="#">pip install -U tf2onnx</a>
         </li>
       </ul>
     </li>
