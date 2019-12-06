@@ -6,7 +6,7 @@
     <a href="#">Python 3.6.8</a>
      <ul>
         <li>
-           <a href="#">sub d</a>
+           <a href="#">pip install tensorflow==1.14</a>
         </li>
       </ul>
     </li>
