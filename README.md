@@ -1,4 +1,4 @@
 "# MagAISimpleApproach" 
 Prerequisites
->python 3.6.8
->.netcore 3.1<br/>
+>>python 3.6.8
+>>.netcore 3.1 <br/>
