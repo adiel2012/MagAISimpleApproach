@@ -17,6 +17,7 @@
      <ul>
         <li>
            <a href="#">dotnet add package Microsoft.ML.OnnxRuntime</a>
+           <a href="#">dotnet add package System.Drawing.Common</a>
         </li>
       </ul>
     </li>
