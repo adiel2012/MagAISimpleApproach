@@ -30,4 +30,5 @@
  </ul>
  <br/>
  <b>Run XOR Project</b>
-python 
+ cd pythonexamples</br>
+ python ./xor.py
