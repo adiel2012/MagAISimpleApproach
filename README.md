@@ -23,7 +23,7 @@
            <a href="#">dotnet add package Microsoft.ML.OnnxRuntime</a>
         </li>
         <li>
-           <a href="#">dotnet add package System.Drawing.Common(in examples with images)</a>
+           <a href="#">dotnet add package System.Drawing.Common (in examples with images)</a>
         </li>
       </ul>
     </li>
