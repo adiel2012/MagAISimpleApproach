@@ -6,8 +6,8 @@
     <a href="#">Python 3.6.8</a>
      <ul>
         <li>
-            <a href="#">pip install tensorflow==1.14</a>          
-            <a href="#">pip install onnxruntime</a>
+            <a href="#">pip install tensorflow==1.14</a>  <br/>        
+            <a href="#">pip install onnxruntime</a><br/>
             <a href="#">pip install -U tf2onnx</a>
         </li>
       </ul>
