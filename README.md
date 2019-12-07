@@ -35,4 +35,8 @@
  Convert the freozen model to an onnx model<br/>
  python -m tf2onnx.convert     --input frozen_model.pb   --inputs XR:0  --outputs MyOutput:0    --output model.onnx    --verbose<br/> 
 <br/>
- <b>Run XOR C# project</b><br/>
+ <b>Run XOR C# project</b><br/> 
+ cd ../csharpxor<br/>
+ dotnet restore<br/>
+ dotnet build<br/> 
+ dotnet run<br/>
