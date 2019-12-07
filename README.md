@@ -12,6 +12,9 @@
             <a href="#">pip install keras</a>
         </li>
          <li>
+            <a href="#">pip install kerasonnx</a>
+        </li>
+         <li>
             <a href="#">pip install onnxruntime</a>
          </li>
          <li>
