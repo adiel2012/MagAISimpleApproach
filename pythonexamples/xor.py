@@ -45,7 +45,7 @@ with tf.gfile.GFile(output_graph, "wb") as f:
        f.write(output_graph_def.SerializeToString())
 
 # https://github.com/onnx/tensorflow-onnx
-# python -m tf2onnx.convert     --input frozen_model.pb   --inputs XR:0  #   --outputs MyOutput:0    --output model.onnx    --verbose
+# python -m tf2onnx.convert     --input frozen_model.pb   --inputs XR:0  --outputs MyOutput:0    --output modelxor.onnx    --verbose
 
 
 

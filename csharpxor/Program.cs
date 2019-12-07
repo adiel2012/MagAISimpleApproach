@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Microsoft.ML.OnnxRuntime;
 using Microsoft.ML.OnnxRuntime.Tensors;
@@ -10,7 +11,7 @@ namespace xoronnxCSharp
     {
         static void Main(string[] args)
         {
-            var session = new InferenceSession("model.onnx");
+            var session = new InferenceSession(Path.GetFullPath("../pythonexamples/modelxor.onnx"));
             string name = "XR:0";
             var inputMeta = session.InputMetadata;
             float[][] inputData = {

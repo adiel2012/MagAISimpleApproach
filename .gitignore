@@ -2,3 +2,6 @@ csharpimgclassification/bin/*
 csharpimgclassification/obj/*
 csharpxor/obj/Debug/*
 csharpxor/obj/*
+csharpxor/bin/Debug/*
+pythonexamples/*.pb
+pythonexamples/*.onnx
