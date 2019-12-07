@@ -37,6 +37,7 @@
 <br/>
  <b>Run XOR C# project</b><br/> 
  cd ../csharpxor<br/>
+ dotnet add package Microsoft.ML.OnnxRuntime<br/>
  dotnet restore<br/>
  dotnet build<br/> 
  dotnet run<br/>
