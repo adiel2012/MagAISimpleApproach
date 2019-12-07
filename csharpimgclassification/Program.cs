@@ -17,6 +17,7 @@ namespace xoronnxCSharp
             var session = new InferenceSession("modelkerasimg.onnx");
             string name = "conv2d_1_input";
             var inputMeta = session.InputMetadata; 
+            string[] classes = {"Car", "Plain"};
             int[] dimentions =  inputMeta[name].Dimensions.Select(dim => dim == -1 ? 1 : dim).ToArray();
             foreach(string file in Directory.GetFiles(@"C:\Users\acastano\Desktop\borrar\kerasimgclasifcsharp\v_data\train\cars", "*.jpg"))
             {
@@ -29,7 +30,9 @@ namespace xoronnxCSharp
                         using (var results = session.Run(inputs))
                         {
                             float[] output = results.ToArray()[0].AsEnumerable<float>().ToArray();
-                            Console.WriteLine($"{row[0]} {row[1]}  --> {output}");
+                            var max = output.Max();
+                            int index = Array.IndexOf(output, output.Max());
+                            //Console.WriteLine($"{row[0]} {row[1]}  --> {output}");
                         }
                     }     
             }
