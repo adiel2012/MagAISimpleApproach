@@ -21,7 +21,8 @@ namespace xoronnxCSharp
                 new[] { 1.0f, 1.0f } };
             foreach (float[] row in inputData)
             {
-                Tensor<float> t1 = new DenseTensor<float>(row, inputMeta[name].Dimensions);
+                int[] dimentions =  inputMeta[name].Dimensions.Select(dim => dim == -1 ? 1 : dim).ToArray();
+                Tensor<float> t1 = new DenseTensor<float>(row, dimentions);
                 var inputs = new List<NamedOnnxValue>() { NamedOnnxValue.CreateFromTensor<float>(name, t1) };
                 using (var results = session.Run(inputs))
                 {

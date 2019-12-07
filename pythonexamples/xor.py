@@ -10,7 +10,7 @@ W_bias = tf.Variable(tf.zeros([2]), name = "c")
 w_bias = tf.Variable(tf.zeros([1]), name = "b")
 
 h = tf.nn.sigmoid(tf.add(tf.matmul(X, W),W_bias))
-y_estimated = tf.sigmoid(tf.add(tf.matmul(h,w),w_bias), name = "mymodel")
+y_estimated = tf.sigmoid(tf.add(tf.matmul(h,w),w_bias), name = "MyOutput")
 loss = tf.reduce_mean(( (Y * tf.log(y_estimated)) + 
        ((1 - Y) * tf.log(1.0 - y_estimated)) ) * -1)
 train_step = tf.train.GradientDescentOptimizer(0.1).minimize(loss)
@@ -27,9 +27,9 @@ for epoch in range(10000):
    if epoch % 1000 == 0:
        print(sess.run(y_estimated, feed_dict={X: INPUT_XOR, Y: OUTPUT_XOR}))
 
-XR = tf.placeholder(tf.float32, shape=[1,2], name = 'XR')
-hR = tf.nn.sigmoid(tf.add(tf.matmul(XR, W),W_bias), name = 'XRfgfgfg' )
-y_estimatedR = tf.sigmoid(tf.add(tf.matmul(hR,w),w_bias), name = "MyOutput")
+#XR = tf.placeholder(tf.float32, shape=[1,2], name = 'XR')
+#hR = tf.nn.sigmoid(tf.add(tf.matmul(XR, W),W_bias), name = 'XRfgfgfg' )
+#y_estimatedR = tf.sigmoid(tf.add(tf.matmul(hR,w),w_bias), name = "MyOutput")
 
 output_names = 'MyOutput'
 output_graph_def = tf.graph_util.convert_variables_to_constants(
