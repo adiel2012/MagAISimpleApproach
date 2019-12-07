@@ -5,3 +5,4 @@ csharpxor/obj/*
 csharpxor/bin/Debug/*
 pythonexamples/*.pb
 pythonexamples/*.onnx
+csharpimgclassification/.vscode/*
