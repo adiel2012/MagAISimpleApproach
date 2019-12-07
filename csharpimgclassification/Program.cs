@@ -28,8 +28,8 @@ namespace xoronnxCSharp
                         var inputs = new List<NamedOnnxValue>(){NamedOnnxValue.CreateFromTensor<float>(name, t1)};
                         using (var results = session.Run(inputs))
                         {
-                            var ff = results.GetType().ToString();
-                            var g = 1;
+                            float[] output = results.ToArray()[0].AsEnumerable<float>().ToArray();
+                            Console.WriteLine($"{row[0]} {row[1]}  --> {output}");
                         }
                     }     
             }
