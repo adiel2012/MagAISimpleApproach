@@ -46,3 +46,6 @@
  cd ../csharpimgclassification<br/>
  dotnet add package System.Drawing.Common<br/>
  dotnet add package Microsoft.ML.OnnxRuntime<br/>
+ dotnet restore<br/>
+ dotnet build<br/> 
+ dotnet run<br/>
