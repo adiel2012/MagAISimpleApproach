@@ -20,6 +20,9 @@
          <li>
             <a href="#">pip install -U tf2onnx</a>
         </li>
+         <li>
+            <a href="#">pip install keras2onnx</a>
+        </li>         
       </ul>
     </li>
     <li>
