@@ -42,7 +42,7 @@
  dotnet build<br/> 
  dotnet run<br/>
  
- <br/><b>Run Images classification project</b><br/>
+ <br/><b>Run C# images classification project</b><br/>
  cd ../csharpimgclassification<br/>
  dotnet add package System.Drawing.Common<br/>
  dotnet add package Microsoft.ML.OnnxRuntime<br/>
