@@ -31,4 +31,6 @@
  <br/>
  <b>Run XOR Project</b><br/>
  cd pythonexamples<br/>
- python ./xor.py
+ python ./xor.py<br/>
+ Convert the freozen model to an onnx model<br/>
+ python -m tf2onnx.convert     --input frozen_model.pb   --inputs XR:0  --outputs MyOutput:0    --output model.onnx    --verbose 
