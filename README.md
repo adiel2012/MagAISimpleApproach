@@ -9,11 +9,20 @@
             <a href="#">pip install tensorflow==1.14</a>
         </li>
          <li>
+            <a href="#">pip install keras</a>
+        </li>
+         <li>
+            <a href="#">pip install kerasonnx</a>
+        </li>
+         <li>
             <a href="#">pip install onnxruntime</a>
          </li>
          <li>
             <a href="#">pip install -U tf2onnx</a>
         </li>
+         <li>
+            <a href="#">pip install keras2onnx</a>
+        </li>         
       </ul>
     </li>
     <li>
