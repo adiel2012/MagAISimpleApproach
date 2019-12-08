@@ -6,3 +6,4 @@ csharpxor/bin/Debug/*
 pythonexamples/*.pb
 pythonexamples/*.onnx
 csharpimgclassification/.vscode/*
+*.h5

@@ -19,7 +19,7 @@ namespace xoronnxCSharp
             var inputMeta = session.InputMetadata; 
             string[] classes = {"Car", "Plain"};
             int[] dimentions =  inputMeta[name].Dimensions.Select(dim => dim == -1 ? 1 : dim).ToArray();
-            foreach(string file in Directory.GetFiles(@"C:\Users\acastano\Desktop\borrar\kerasimgclasifcsharp\v_data\train\cars", "*.jpg"))
+            foreach(string file in Directory.GetFiles(Path.GetFullPath("../pythonexamples/v_data/train/cars"), "*.jpg"))
             {
                 float[][] inputData = {loadimage(file)};
                                 
@@ -41,7 +41,7 @@ namespace xoronnxCSharp
 
         private static float[] loadimage(string img_file)
         {
-            var image = new Bitmap(img_file, true);
+            var image = new Bitmap(img_file, false);
             float[] result = new float[3 * image.Height * image.Width];
             int pos = 0;
             for(int x=0; x<image.Width; x++)
