@@ -17,33 +17,36 @@ namespace xoronnxCSharp
             var session = new InferenceSession(Path.GetFullPath("../pythonexamples/modelkerasimg.onnx"));
             string name = "conv2d_1_input";
             var inputMeta = session.InputMetadata; 
-            string[] classes = {"Car", "Plain"};
+            string[] classes = {"cars", "planes"};
             int[] dimentions =  inputMeta[name].Dimensions.Select(dim => dim == -1 ? 1 : dim).ToArray();
-            
-            int M1 = 0, m1 = 0;
+            int[,] confussion_matrix = new int[2,2];
 
-            foreach(string file in Directory.GetFiles(Path.GetFullPath("../pythonexamples/v_data/train/cars"), "*.jpg"))
+            for(int class_index = 0 ; class_index < 2; class_index++)
             {
-                float[][] inputData = {loadimage(file)};
-                                
-                    foreach(float[] row in inputData)
-                    {
-                        Tensor<float> t1 = new DenseTensor<float>(row,dimentions);
-                        var inputs = new List<NamedOnnxValue>(){NamedOnnxValue.CreateFromTensor<float>(name, t1)};
-                        using (var results = session.Run(inputs))
+                foreach(string file in Directory.GetFiles(Path.GetFullPath($"../pythonexamples/v_data/train/{classes[class_index]}"), "*.jpg"))
+                {
+                    float[][] inputData = {loadimage(file)};
+                                    
+                        foreach(float[] row in inputData)
                         {
-                            float[] output = results.ToArray()[0].AsEnumerable<float>().ToArray();
-                            int index = output[0] > 0.5 ? 1 : 0;
-                            M1 += output[0] > 0.5 ? 1 : 0;
-                            m1 += output[0] <= 0.5 ? 1 : 0;
+                            Tensor<float> t1 = new DenseTensor<float>(row,dimentions);
+                            var inputs = new List<NamedOnnxValue>(){NamedOnnxValue.CreateFromTensor<float>(name, t1)};
+                            using (var results = session.Run(inputs))
+                            {
+                                float[] output = results.ToArray()[0].AsEnumerable<float>().ToArray();
+                                int index = output[0] > 0.5 ? 1 : 0;                                
+                                confussion_matrix[class_index, index]++;
+                            }
+                        }     
+                }
+            } 
+            DisplayConfussionMatrix(confussion_matrix, classes);         
+        
+        }
 
-                            Console.WriteLine($"{output[0]}");
-                        }
-                    }     
-            }
-
-            Console.WriteLine($"M1: {(float)M1/(M1+m1)} m1: {(float)m1/(M1+m1)}");
-                     
+        private static void DisplayConfussionMatrix(int[,] confussion_matrix, string[] classes)
+        {
+           
         }
 
         private static float[] loadimage(string img_file)
