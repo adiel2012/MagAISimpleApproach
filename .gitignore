@@ -7,3 +7,6 @@ pythonexamples/*.pb
 pythonexamples/*.onnx
 csharpimgclassification/.vscode/*
 *.h5
+csharpsentimentanalysis/obj/*
+.vscode/*
+csharpsentimentanalysis/.vscode/*

@@ -8,6 +8,9 @@ from keras.layers import Embedding
 from keras.layers import LSTM
 from keras.layers import Conv1D, MaxPooling1D
 from keras.datasets import imdb
+import onnx
+import keras2onnx
+import onnxruntime
 
 # Embedding
 max_features = 20000
