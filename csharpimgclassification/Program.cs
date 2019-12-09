@@ -40,12 +40,25 @@ namespace xoronnxCSharp
                         }     
                 }
             } 
-            DisplayConfussionMatrix(confussion_matrix, classes);         
+            DisplayStatistics(confussion_matrix, classes);         
         
         }
 
-        private static void DisplayConfussionMatrix(int[,] confussion_matrix, string[] classes)
+        private static void DisplayStatistics(int[,] confussion_matrix, string[] classes)
         {
+           //confussion matrix
+           int num_classes = classes.Length;
+
+           Console.WriteLine("      " + string.Join<string>("  ", classes));
+           for(int i = 0 ; i < classes.Length ;i++)
+           {
+               Console.Write($"{classes[i]} ");
+               for(int j = 0 ; j < classes.Length ;j++)
+               {
+                   Console.Write($"{confussion_matrix[i,j]} ");
+               }
+               Console.WriteLine();
+           }
            
         }
 
