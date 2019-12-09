@@ -1,3 +1,4 @@
+#https://keras.io/examples/cifar10_cnn/
 # https://www.geeksforgeeks.org/python-image-classification-using-keras/
 from keras.preprocessing.image import ImageDataGenerator 
 from keras.models import Sequential 
