@@ -19,6 +19,9 @@ namespace xoronnxCSharp
             var inputMeta = session.InputMetadata; 
             string[] classes = {"Car", "Plain"};
             int[] dimentions =  inputMeta[name].Dimensions.Select(dim => dim == -1 ? 1 : dim).ToArray();
+            
+            int M1 = 0, m1 = 0;
+
             foreach(string file in Directory.GetFiles(Path.GetFullPath("../pythonexamples/v_data/train/cars"), "*.jpg"))
             {
                 float[][] inputData = {loadimage(file)};
@@ -30,12 +33,16 @@ namespace xoronnxCSharp
                         using (var results = session.Run(inputs))
                         {
                             float[] output = results.ToArray()[0].AsEnumerable<float>().ToArray();
-                            var max = output.Max();
-                            int index = Array.IndexOf(output, output.Max());
-                            //Console.WriteLine($"{row[0]} {row[1]}  --> {output}");
+                            int index = output[0] > 0.5 ? 1 : 0;
+                            M1 += output[0] > 0.5 ? 1 : 0;
+                            m1 += output[0] <= 0.5 ? 1 : 0;
+
+                            Console.WriteLine($"{output[0]}");
                         }
                     }     
             }
+
+            Console.WriteLine($"M1: {(float)M1/(M1+m1)} m1: {(float)m1/(M1+m1)}");
                      
         }
 
@@ -49,9 +56,9 @@ namespace xoronnxCSharp
                 for(int y=0; y<image.Height; y++)
                 {
                     Color pixelColor = image.GetPixel(x, y);
-                    result[pos++] = pixelColor.R;
-                    result[pos++] = pixelColor.G;
-                    result[pos++] = pixelColor.B;
+                    result[pos++] = (float)pixelColor.R/255;
+                    result[pos++] = (float)pixelColor.G/255;
+                    result[pos++] = (float)pixelColor.B/255;
                 }
             }
 
