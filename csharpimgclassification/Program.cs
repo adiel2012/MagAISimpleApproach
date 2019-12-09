@@ -59,7 +59,9 @@ namespace xoronnxCSharp
                }
                Console.WriteLine();
            }
-           
+
+            float precision = (float)(confussion_matrix[0,0]+confussion_matrix[1,1])/(confussion_matrix[0,0]+confussion_matrix[1,1]+confussion_matrix[1,0]+confussion_matrix[1,0]);
+            Console.WriteLine($"Precision: {precision}");
         }
 
         private static float[] loadimage(string img_file)
@@ -75,6 +77,28 @@ namespace xoronnxCSharp
                     result[pos++] = (float)pixelColor.R/255;
                     result[pos++] = (float)pixelColor.G/255;
                     result[pos++] = (float)pixelColor.B/255;
+                }
+            }
+
+            return result;
+        }
+
+        private static float[] loadimage2(string img_file)
+        {
+            var image = new Bitmap(img_file, false);
+            float[] result = new float[3 * image.Height * image.Width];
+            int pos = 0;
+            int asize = image.Height * image.Width;
+            for(int x=0; x<image.Width; x++)
+            {
+                for(int y=0; y<image.Height; y++)
+                {
+                    Color pixelColor = image.GetPixel(x, y);
+                    result[pos] = (float)pixelColor.R/255;
+                    result[pos+asize] = (float)pixelColor.G/255;
+                    result[pos+2*asize] = (float)pixelColor.B/255;
+
+                    pos++;
                 }
             }
 

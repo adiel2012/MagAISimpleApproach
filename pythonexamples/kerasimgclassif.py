@@ -4,6 +4,9 @@ from keras.models import Sequential
 from keras.layers import Conv2D, MaxPooling2D 
 from keras.layers import Activation, Dropout, Flatten, Dense 
 from keras import backend as K   
+from keras.callbacks.callbacks import EarlyStopping  
+from keras.callbacks import ModelCheckpoint
+from keras.callbacks.callbacks import ReduceLROnPlateau
 import onnx
 import keras2onnx
 import onnxruntime
@@ -63,11 +66,16 @@ validation_generator = test_datagen.flow_from_directory(
                                     validation_data_dir, 
                    target_size =(img_width, img_height), 
           batch_size = batch_size, class_mode ='binary') 
+
+earlyStopping = EarlyStopping(monitor='val_loss', patience=10, verbose=0, mode='min')
+mcp_save = ModelCheckpoint('.mdl_wts.hdf5', save_best_only=True, monitor='val_loss', mode='min')
+reduce_lr_loss = ReduceLROnPlateau(monitor='val_loss', factor=0.1, patience=7, verbose=1, epsilon=1e-4, mode='min')
   
 model.fit_generator(train_generator, 
     steps_per_epoch = nb_train_samples // batch_size, 
     epochs = epochs, validation_data = validation_generator, 
-    validation_steps = nb_validation_samples // batch_size) 
+    validation_steps = nb_validation_samples // batch_size
+    , callbacks=[earlyStopping, mcp_save]) 
   
 model.save_weights('model_saved.h5') 
 
