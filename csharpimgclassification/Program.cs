@@ -24,7 +24,7 @@ namespace xoronnxCSharp
 
             for(int class_index = 0 ; class_index < num_classes; class_index++)
             {
-                foreach(string file in Directory.GetFiles(Path.GetFullPath($"../pythonexamples/v_data/train/{classes[class_index]}"), "*.jpg"))
+                foreach(string file in Directory.GetFiles(Path.GetFullPath($"../pythonexamples/v_data/test/{classes[class_index]}"), "*.jpg"))
                 {
                     float[][] inputData = {loadimage(file)};
                                     
