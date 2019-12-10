@@ -57,7 +57,7 @@
   python ./kerasimgclassif_save_onnx_best_model.py
 <br/>
  
- <br/><b>Run C# images classification project</b><br/>
+ <b>Run C# images classification project</b><br/>
  cd ../csharpimgclassification<br/>
  dotnet add package System.Drawing.Common<br/>
  dotnet add package Microsoft.ML.OnnxRuntime<br/>
