@@ -1,5 +1,6 @@
 #https://keras.io/examples/cifar10_cnn/
 # https://www.geeksforgeeks.org/python-image-classification-using-keras/
+
 from keras.preprocessing.image import ImageDataGenerator 
 from keras.models import Sequential 
 from keras.layers import Conv2D, MaxPooling2D 
@@ -9,9 +10,10 @@ from keras.callbacks.callbacks import EarlyStopping
 from keras.callbacks import ModelCheckpoint
 from keras.callbacks.callbacks import ReduceLROnPlateau
 from keras.optimizers import RMSprop
-import onnx
 import keras2onnx
 import onnxruntime
+import tensorflow.keras.models as keras_models
+import onnx
 
   
 img_width, img_height = 224, 224
@@ -20,7 +22,7 @@ train_data_dir = 'v_data/train'
 validation_data_dir = 'v_data/test'
 nb_train_samples = 400 
 nb_validation_samples = 100
-epochs = 1000
+epochs = 25
 batch_size = 16
   
 if K.image_data_format() == 'channels_first': 
@@ -92,4 +94,3 @@ onnx_model = keras2onnx.convert_keras(model, model.name)
 #save model
 temp_model_file = 'modelkerasimg.onnx'
 onnx.save_model(onnx_model, temp_model_file)
-sess = onnxruntime.InferenceSession(temp_model_file)

@@ -61,7 +61,7 @@ namespace xoronnxCSharp
                Console.WriteLine();
            }
 
-            float precision = (float)(confussion_matrix[0,0]+confussion_matrix[1,1])/(confussion_matrix[0,0]+confussion_matrix[1,1]+confussion_matrix[1,0]+confussion_matrix[1,0]);
+            float precision = (float)(confussion_matrix[0,0]+confussion_matrix[1,1])/(confussion_matrix[0,0]+confussion_matrix[1,1]+confussion_matrix[1,0]+confussion_matrix[0,1]);
             Console.WriteLine($"Precision: {precision}");
         }
 
