@@ -54,7 +54,7 @@
  <br/><b>Run XOR python project</b><br/>
  cd ../pythonexamples<br/>
  python ./kerasimgclassif.py<br/>
-  python ./kerasimgclassif_save_onnx_best_model.py<br/>
+  python ./kerasimgclassif_save_onnx_best_model.py
 <br/>
  
  <br/><b>Run C# images classification project</b><br/>
