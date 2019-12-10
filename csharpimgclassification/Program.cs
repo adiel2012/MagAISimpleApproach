@@ -18,10 +18,11 @@ namespace xoronnxCSharp
             string name = "conv2d_1_input";
             var inputMeta = session.InputMetadata; 
             string[] classes = {"cars", "planes"};
+            int num_classes = classes.Length;
             int[] dimentions =  inputMeta[name].Dimensions.Select(dim => dim == -1 ? 1 : dim).ToArray();
-            int[,] confussion_matrix = new int[2,2];
+            int[,] confussion_matrix = new int[num_classes,num_classes];
 
-            for(int class_index = 0 ; class_index < 2; class_index++)
+            for(int class_index = 0 ; class_index < num_classes; class_index++)
             {
                 foreach(string file in Directory.GetFiles(Path.GetFullPath($"../pythonexamples/v_data/train/{classes[class_index]}"), "*.jpg"))
                 {
@@ -33,9 +34,9 @@ namespace xoronnxCSharp
                             var inputs = new List<NamedOnnxValue>(){NamedOnnxValue.CreateFromTensor<float>(name, t1)};
                             using (var results = session.Run(inputs))
                             {
-                                float[] output = results.ToArray()[0].AsEnumerable<float>().ToArray();
-                                int index = output[0] > 0.5 ? 1 : 0;                                
-                                confussion_matrix[class_index, index]++;
+                                float[] output = results.ToArray()[0].AsEnumerable<float>().ToArray();                                
+                                int maxIndex = output.ToList().IndexOf(output.Max());                               
+                                confussion_matrix[class_index, maxIndex]++;
                             }
                         }     
                 }
@@ -69,9 +70,9 @@ namespace xoronnxCSharp
             var image = new Bitmap(img_file, false);
             float[] result = new float[3 * image.Height * image.Width];
             int pos = 0;
-            for(int x=0; x<image.Width; x++)
+            for(int y=0; y<image.Height; y++)
             {
-                for(int y=0; y<image.Height; y++)
+                for(int x=0; x<image.Width; x++)
                 {
                     Color pixelColor = image.GetPixel(x, y);
                     result[pos++] = (float)pixelColor.R/255;
