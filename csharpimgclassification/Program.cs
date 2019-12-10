@@ -14,7 +14,7 @@ namespace xoronnxCSharp
     {
         static void Main(string[] args)
         {            
-            var session = new InferenceSession(Path.GetFullPath("../pythonexamples/modelkerasimg.onnx"));
+            var session = new InferenceSession(Path.GetFullPath("../pythonexamples/modelkerasimgBEST.onnx"));
             string name = "conv2d_1_input";
             var inputMeta = session.InputMetadata; 
             string[] classes = {"cars", "planes"};
