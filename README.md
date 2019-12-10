@@ -51,6 +51,12 @@
  dotnet build<br/> 
  dotnet run<br/>
  
+ <br/><b>Run XOR python project</b><br/>
+ cd ../pythonexamples<br/>
+ python ./kerasimgclassif.py<br/>
+  python ./kerasimgclassif_save_onnx_best_model.py<br/>
+<br/>
+ 
  <br/><b>Run C# images classification project</b><br/>
  cd ../csharpimgclassification<br/>
  dotnet add package System.Drawing.Common<br/>
