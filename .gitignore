@@ -11,3 +11,4 @@ csharpsentimentanalysis/obj/*
 .vscode/*
 csharpsentimentanalysis/.vscode/*
 *.mdl_wts.hdf5
+csharpsentimentanalysis/bin/*
