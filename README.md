@@ -51,7 +51,7 @@
  dotnet build<br/> 
  dotnet run<br/>
  
- <br/><b>Run Image Classification python project (Keras)</b><br/>
+ <br/><b>Run images classification python project (Keras)</b><br/>
  cd ../pythonexamples<br/>
  python ./kerasimgclassif.py<br/>
   python ./kerasimgclassif_save_onnx_best_model.py
