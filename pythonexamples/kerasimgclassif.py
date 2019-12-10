@@ -8,6 +8,7 @@ from keras import backend as K
 from keras.callbacks.callbacks import EarlyStopping  
 from keras.callbacks import ModelCheckpoint
 from keras.callbacks.callbacks import ReduceLROnPlateau
+from keras.optimizers import RMSprop
 import onnx
 import keras2onnx
 import onnxruntime
@@ -28,28 +29,34 @@ else:
     input_shape = (img_width, img_height, 3) 
   
 model = Sequential() 
-model.add(Conv2D(32, (2, 2), input_shape = input_shape)) 
+model.add(Conv2D(32, (3, 3), padding='same', input_shape = input_shape)) 
 model.add(Activation('relu')) 
-model.add(MaxPooling2D(pool_size =(2, 2))) 
+model.add(Conv2D(32, (3, 3)))
+model.add(Activation('relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Dropout(0.25))
+
+model.add(Conv2D(64, (3, 3), padding='same'))
+model.add(Activation('relu'))
+model.add(Conv2D(64, (3, 3)))
+model.add(Activation('relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Dropout(0.25))
+
+model.add(Flatten())
+model.add(Dense(512))
+model.add(Activation('relu'))
+model.add(Dropout(0.5))
+model.add(Dense(2))
+model.add(Activation('softmax'))
   
-model.add(Conv2D(32, (2, 2))) 
-model.add(Activation('relu')) 
-model.add(MaxPooling2D(pool_size =(2, 2))) 
-  
-model.add(Conv2D(64, (2, 2))) 
-model.add(Activation('relu')) 
-model.add(MaxPooling2D(pool_size =(2, 2))) 
-  
-model.add(Flatten()) 
-model.add(Dense(64)) 
-model.add(Activation('relu')) 
-model.add(Dropout(0.5)) 
-model.add(Dense(1)) 
-model.add(Activation('sigmoid')) 
-  
-model.compile(loss ='binary_crossentropy', 
-                     optimizer ='rmsprop', 
-                   metrics =['accuracy']) 
+# initiate RMSprop optimizer
+opt = RMSprop(learning_rate=0.0001, decay=1e-6)
+
+# Let's train the model using RMSprop
+model.compile(loss='categorical_crossentropy',
+              optimizer=opt,
+              metrics=['accuracy'])
   
 train_datagen = ImageDataGenerator( 
                 rescale = 1. / 255, 
@@ -61,22 +68,22 @@ test_datagen = ImageDataGenerator(rescale = 1. / 255)
   
 train_generator = train_datagen.flow_from_directory(train_data_dir, 
                               target_size =(img_width, img_height), 
-                     batch_size = batch_size, class_mode ='binary') 
+                     batch_size = batch_size, class_mode ='categorical') 
   
 validation_generator = test_datagen.flow_from_directory( 
                                     validation_data_dir, 
                    target_size =(img_width, img_height), 
-          batch_size = batch_size, class_mode ='binary') 
+          batch_size = batch_size, class_mode ='categorical') 
 
 earlyStopping = EarlyStopping(monitor='val_loss', patience=10, verbose=0, mode='min')
 mcp_save = ModelCheckpoint('.mdl_wts.hdf5', save_best_only=True, monitor='val_loss', mode='min')
-reduce_lr_loss = ReduceLROnPlateau(monitor='val_loss', factor=0.1, patience=7, verbose=1, epsilon=1e-4, mode='min')
+#reduce_lr_loss = ReduceLROnPlateau(monitor='val_loss', factor=0.1, patience=7, verbose=1, epsilon=1e-4, mode='min')
   
 model.fit_generator(train_generator, 
     steps_per_epoch = nb_train_samples // batch_size, 
     epochs = epochs, validation_data = validation_generator, 
     validation_steps = nb_validation_samples // batch_size
-    , callbacks=[earlyStopping, mcp_save]) 
+    ,callbacks=[earlyStopping, mcp_save]) 
   
 model.save_weights('model_saved.h5') 
 
