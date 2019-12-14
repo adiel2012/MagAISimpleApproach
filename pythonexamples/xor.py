@@ -27,10 +27,6 @@ for epoch in range(10000):
    if epoch % 1000 == 0:
        print(sess.run(y_estimated, feed_dict={X: INPUT_XOR, Y: OUTPUT_XOR}))
 
-#XR = tf.placeholder(tf.float32, shape=[1,2], name = 'XR')
-#hR = tf.nn.sigmoid(tf.add(tf.matmul(XR, W),W_bias), name = 'XRfgfgfg' )
-#y_estimatedR = tf.sigmoid(tf.add(tf.matmul(hR,w),w_bias), name = "MyOutput")
-
 output_names = 'MyOutput'
 output_graph_def = tf.graph_util.convert_variables_to_constants(
            sess, # The session is used to retrieve the weights
@@ -45,7 +41,7 @@ with tf.gfile.GFile(output_graph, "wb") as f:
        f.write(output_graph_def.SerializeToString())
 
 # https://github.com/onnx/tensorflow-onnx
-# python -m tf2onnx.convert     --input frozen_model.pb   --inputs XR:0  --outputs MyOutput:0    --output modelxor.onnx    --verbose
+# python -m tf2onnx.convert     --input frozen_model.pb   --inputs X:0  --outputs MyOutput:0    --output modelxor.onnx    --verbose
 
 
 
