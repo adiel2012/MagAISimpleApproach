@@ -12,7 +12,7 @@ namespace xoronnxCSharp
         static void Main(string[] args)
         {
             var session = new InferenceSession(Path.GetFullPath("../pythonexamples/modelxor.onnx"));
-            string name = "XR:0";
+            string name = "X:0";
             var inputMeta = session.InputMetadata;
             float[][] inputData = {
                 new[] { 0.0f, 0.0f },
