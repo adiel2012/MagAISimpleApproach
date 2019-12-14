@@ -38,6 +38,7 @@
     </li>
  </ul>
  <br/>
+ git clone https://github.com/adiel2012/MagAISimpleApproach.git<br/>
  <b>Run XOR python project</b><br/>
  cd ./MagAISimpleApproach/pythonexamples<br/>
  python ./xor.py<br/>
