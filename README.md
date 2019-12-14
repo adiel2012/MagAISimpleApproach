@@ -39,7 +39,7 @@
  </ul>
  <br/>
  <b>Run XOR python project</b><br/>
- cd pythonexamples<br/>
+ cd ./MagAISimpleApproach/pythonexamples<br/>
  python ./xor.py<br/>
  Convert the freozen model to an onnx model<br/>
  python -m tf2onnx.convert     --input frozen_model.pb   --inputs XR:0  --outputs MyOutput:0    --output modelxor.onnx    --verbose<br/> 
