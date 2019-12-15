@@ -14,3 +14,7 @@ onnx_model = keras2onnx.convert_keras(best_model, best_model.name)
 #save model
 temp_model_file = 'modelkerasimgBEST.onnx'
 onnx.save_model(onnx_model, temp_model_file)
+
+
+temp_model_file = '../nodejsimgclassification/public/modelkerasimgBEST.onnx'
+onnx.save_model(onnx_model, temp_model_file)

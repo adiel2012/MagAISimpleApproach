@@ -12,3 +12,5 @@ csharpsentimentanalysis/obj/*
 csharpsentimentanalysis/.vscode/*
 *.mdl_wts.hdf5
 csharpsentimentanalysis/bin/*
+nodejsimgclassification/node_modules/*
+*.onnx

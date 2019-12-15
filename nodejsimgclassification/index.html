@@ -69,7 +69,7 @@
             // create a session
             var myOnnxSession = new onnx.InferenceSession();
             // load the ONNX model file
-            myOnnxSession.loadModel("./modelkerasimgBEST.onnx").then(() => {
+            myOnnxSession.loadModel("/modelkerasimgBEST.onnx").then(() => {
                 OnModelLoaded();
             });
         });
