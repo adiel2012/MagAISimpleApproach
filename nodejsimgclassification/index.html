@@ -19,7 +19,8 @@
         function OnModelLoaded()
         {
             $('#fileToClassify').prop('disabled', false);
-            $('#btnSubmit').prop('disabled', false);     
+            $('#btnSubmit').prop('disabled', false);
+            loadCanvasWithInputFile();     
         }
 
         function RunClassification()
@@ -53,7 +54,7 @@
                         if( evt.target.readyState == FileReader.DONE) {
                             img.src = evt.target.result;
                             img.onload = () => {
-                                cxt.drawImage(img, 240, 240);
+                                context.drawImage(img, 240, 240);
                                 RunClassification();
                             };
                         }
