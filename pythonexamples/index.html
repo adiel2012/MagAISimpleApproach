@@ -1,0 +1,78 @@
+<html>
+  <head> </head>
+  <body>
+
+        <form >
+            Select image :
+            <input type="file" name="fileToClassify" id="fileToClassify" disabled />
+            <input type="submit" id="btnSubmit" disabled />
+        </form>
+        <canvas id="canvas" width=240 height=240></canvas>       
+  </body>
+      <!-- Load ONNX.js -->
+      <script src="https://cdn.jsdelivr.net/npm/onnxjs/dist/onnx.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <!-- Code that consume ONNX.js -->
+      <script>    
+        // https://github.com/Microsoft/onnxjs
+  
+        function OnModelLoaded()
+        {
+            $('#fileToClassify').prop('disabled', false);
+            $('#btnSubmit').prop('disabled', false);     
+        }
+
+        function RunClassification()
+        {
+            alert('yes');
+            // generate model input
+            /* const inferenceInputs = getInputs();
+            // execute the model
+            session.run(inferenceInputs).then(output => {
+                // consume the output
+                const outputTensor = output.values().next().value;
+                console.log(`model output tensor: ${outputTensor.data}.`);
+            });*/
+        }
+
+        function loadCanvasWithInputFile(){
+            // canvas
+            var canvas = document.getElementById('canvas');
+            var context = canvas.getContext("2d"); 
+            var fileinput = document.getElementById('fileToClassify'); // input file
+            var img = new Image();
+
+            fileinput.onchange = function(evt) {
+                var files = evt.target.files; // FileList object
+                var file = files[0];
+                if(file.type.match('image.*')) {
+                    var reader = new FileReader();
+                    // Read in the image file as a data URL.
+                    reader.readAsDataURL(file);
+                    reader.onload = function(evt){
+                        if( evt.target.readyState == FileReader.DONE) {
+                            img.src = evt.target.result;
+                            img.onload = () => {
+                                cxt.drawImage(img, 240, 240);
+                                RunClassification();
+                            };
+                        }
+                    }    
+
+                } else {
+                    alert("not an image");
+                }
+            };
+        }
+
+        $(document).ready(function(){
+            // create a session
+            var myOnnxSession = new onnx.InferenceSession();
+            // load the ONNX model file
+            myOnnxSession.loadModel("./modelkerasimgBEST.onnx").then(() => {
+                OnModelLoaded();
+            });
+        });
+        
+      </script>
+</html>
