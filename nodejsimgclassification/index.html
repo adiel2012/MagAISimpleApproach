@@ -30,19 +30,24 @@
             var context = canvas.getContext("2d"); 
             var imgData = context.getImageData(0, 0, 240, 240);
             var i;
-            var inputs = Array(240, 240);
+            var input = Array(240, 240);
             let pos = 0;
             //alert(imgData.data.length);
             for (i = 0; i < imgData.data.length; i += 4) {
-                inputs[pos++] = imgData.data[i + 1]/(255.0) ;
-                inputs[pos++] = imgData.data[i + 2]/(255.0) ;
-                inputs[pos++] = imgData.data[i + 3]/(255.0) ;
+                input[pos++] = imgData.data[i + 1]/(255.0) ;
+                input[pos++] = imgData.data[i + 2]/(255.0) ;
+                input[pos++] = imgData.data[i + 3]/(255.0) ;
             }
+
+            // creating an array of input Tensors is the easiest way. For other options see the API documentation
+            const inputs = [
+            new Tensor(new Float32Array(input), "float32", [1, 240, 240, 3])
+            ];
 
             // generate model input
              const inferenceInputs = inputs;  // getInputs();
             // execute the model
-            session.run(inferenceInputs).then(output => {
+            myOnnxSession.run(inferenceInputs).then(output => {
                 // consume the output
                 const outputTensor = output.values().next().value;
                 console.log(`model output tensor: ${outputTensor.data}.`);
@@ -89,9 +94,11 @@
             };
         }
 
+        // create a session
+        var myOnnxSession = new onnx.InferenceSession();
+
         $(document).ready(function(){
-            // create a session
-            var myOnnxSession = new onnx.InferenceSession();
+            
             // load the ONNX model file
             myOnnxSession.loadModel("/modelkerasimgBEST.onnx").then(() => {
                 OnModelLoaded();
