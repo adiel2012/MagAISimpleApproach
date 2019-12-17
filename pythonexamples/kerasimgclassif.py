@@ -10,10 +10,13 @@ from keras.callbacks.callbacks import EarlyStopping
 from keras.callbacks import ModelCheckpoint
 from keras.callbacks.callbacks import ReduceLROnPlateau
 from keras.optimizers import RMSprop
+from keras.engine import InputLayer
 import keras2onnx
 import onnxruntime
 import tensorflow.keras.models as keras_models
 import onnx
+from keras.engine.training import Model
+from keras.engine.input_layer import Input
 
   
 img_width, img_height = 224, 224
@@ -22,7 +25,7 @@ train_data_dir = 'v_data/train'
 validation_data_dir = 'v_data/test'
 nb_train_samples = 400 
 nb_validation_samples = 100
-epochs = 25
+epochs = 1
 batch_size = 16
   
 if K.image_data_format() == 'channels_first': 
@@ -31,6 +34,7 @@ else:
     input_shape = (img_width, img_height, 3) 
   
 model = Sequential() 
+model.add(InputLayer(input_shape=(img_width, img_height, 3) , name="input_1"))
 model.add(Conv2D(32, (3, 3), padding='same', input_shape = input_shape)) 
 model.add(Activation('relu')) 
 model.add(Conv2D(32, (3, 3)))
@@ -86,11 +90,24 @@ model.fit_generator(train_generator,
     epochs = epochs, validation_data = validation_generator, 
     validation_steps = nb_validation_samples // batch_size
     ,callbacks=[earlyStopping, mcp_save]) 
-  
-model.save_weights('model_saved.h5') 
 
-# convert to onnx model
+model._layers.pop(0)
+newInput = Input(batch_shape=(1,224,224,3))   
+newOutputs = model(newInput)
+model = Model(newInput, newOutputs)
+model.save_weights('model_saved.h5') 
 onnx_model = keras2onnx.convert_keras(model, model.name)
-#save model
 temp_model_file = 'modelkerasimg.onnx'
+onnx.save_model(onnx_model, temp_model_file)
+
+model = mcp_save.model
+
+model._layers.pop(0)
+newInput = Input(batch_shape=(1,224,224,3), name="input_1")   
+newOutputs = model(newInput)
+model = Model(newInput, newOutputs)
+onnx_model = keras2onnx.convert_keras(model, model.name)
+temp_model_file = 'modelkerasimgBEST.onnx'
+onnx.save_model(onnx_model, temp_model_file)
+temp_model_file = '../nodejsimgclassification/public/modelkerasimgBEST.onnx'
 onnx.save_model(onnx_model, temp_model_file)

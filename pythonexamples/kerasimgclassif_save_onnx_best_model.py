@@ -8,9 +8,22 @@ import tensorflow.keras.models as keras_models
 
 import onnx
 import keras2onnx
+from keras.engine import InputLayer
 
-best_model = keras_models.load_model('.mdl_wts.hdf5')
-onnx_model = keras2onnx.convert_keras(best_model, best_model.name)
+from keras.engine.training import Model
+from keras.engine.input_layer import Input
+
+model = keras_models.load_model('.mdl_wts.hdf5')
+
+
+model.layers[0] = InputLayer(input_shape=(1,224,224,3), name="input_1")
+
+#model._layers.pop(0)
+#newInput = Input(shape=(None,224,224,3))    # let us say this new InputLayer
+#newOutputs = model(newInput)
+#model = Model(newInput, newOutputs)
+
+onnx_model = keras2onnx.convert_keras(model, model.name)
 #save model
 temp_model_file = 'modelkerasimgBEST.onnx'
 onnx.save_model(onnx_model, temp_model_file)
