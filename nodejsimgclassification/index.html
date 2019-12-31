@@ -7,7 +7,7 @@
             <input type="file" name="fileToClassify" id="fileToClassify" disabled />
             <input type="submit" id="btnSubmit" disabled />
         </form>
-        <canvas id="mycanvas" width=240 height=240></canvas>       
+        <canvas id="mycanvas" width=224 height=224></canvas>       
   </body>
       <!-- Load ONNX.js -->
       <script src="https://cdn.jsdelivr.net/npm/onnxjs/dist/onnx.min.js"></script>
@@ -28,20 +28,20 @@
             // canvas
             var canvas = document.getElementById('mycanvas');
             var context = canvas.getContext("2d"); 
-            var imgData = context.getImageData(0, 0, 240, 240);
+            var imgData = context.getImageData(0, 0, 224, 224);
             var i;
-            var input = Array(240, 240);
+            var input = Array(224, 224);
             let pos = 0;
             //alert(imgData.data.length);
             for (i = 0; i < imgData.data.length; i += 4) {
+                input[pos++] = imgData.data[i]/(255.0) ;
                 input[pos++] = imgData.data[i + 1]/(255.0) ;
                 input[pos++] = imgData.data[i + 2]/(255.0) ;
-                input[pos++] = imgData.data[i + 3]/(255.0) ;
             }
 
             // creating an array of input Tensors is the easiest way. For other options see the API documentation
             const inputs = [
-            new Tensor(new Float32Array(input), "float32", [1, 240, 240, 3])
+            new Tensor(new Float32Array(input), "float32", [1, 224, 224, 3])
             ];
 
             // generate model input
@@ -82,7 +82,7 @@
                         if( evt.target.readyState == FileReader.DONE) {
                             img.src = evt.target.result;
                             img.onload = () => {
-                                context.drawImage(img, 0, 0, 240, 240);
+                                context.drawImage(img, 0, 0, 224, 224);
                                 RunClassification();
                             };
                         }
