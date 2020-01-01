@@ -1,7 +1,6 @@
 <html>
   <head> </head>
   <body>
-
         <form >
             Select image :
             <input type="file" name="fileToClassify" id="fileToClassify" disabled /><br/>            
@@ -32,7 +31,6 @@
             var i;
             var input = Array(224, 224);
             let pos = 0;
-            //alert(imgData.data.length);
             for (i = 0; i < imgData.data.length; i += 4) {
                 input[pos++] = imgData.data[i]/(255.0) ;
                 input[pos++] = imgData.data[i + 1]/(255.0) ;
@@ -57,16 +55,6 @@
                     $(`#${item}`).text(outputs[index]);
                 });
             });
-
-            //alert('yes');
-            // generate model input
-            /* const inferenceInputs = getInputs();
-            // execute the model
-            session.run(inferenceInputs).then(output => {
-                // consume the output
-                const outputTensor = output.values().next().value;
-                console.log(`model output tensor: ${outputTensor.data}.`);
-            });*/
         }
 
         function loadCanvasWithInputFile(){
@@ -91,8 +79,7 @@
                                 RunClassification();
                             };
                         }
-                    }    
-
+                    }  
                 } else {
                     alert("not an image");
                 }
@@ -102,8 +89,7 @@
         // create a session
         var myOnnxSession = new onnx.InferenceSession();
 
-        $(document).ready(function(){
-            
+        $(document).ready(function(){            
             // load the ONNX model file
             myOnnxSession.loadModel("/modelkerasimgBEST.onnx").then(() => {
                 OnModelLoaded();
