@@ -4,8 +4,9 @@
 
         <form >
             Select image :
-            <input type="file" name="fileToClassify" id="fileToClassify" disabled />
-            <input type="submit" id="btnSubmit" disabled />
+            <input type="file" name="fileToClassify" id="fileToClassify" disabled /><br/>            
+            <label>Car:</label><label id="percent_car">0</label><label>%</label><br/>
+            <label>Plane:</label><label id="percent_plane">0</label><label>%</label><br/>
         </form>
         <canvas id="mycanvas" width=224 height=224></canvas>       
   </body>
@@ -19,7 +20,6 @@
         function OnModelLoaded()
         {
             $('#fileToClassify').prop('disabled', false);
-            $('#btnSubmit').prop('disabled', false);
             loadCanvasWithInputFile();     
         }
 
@@ -50,7 +50,12 @@
             myOnnxSession.run(inferenceInputs).then(output => {
                 // consume the output
                 const outputTensor = output.values().next().value;
-                console.log(`model output tensor: ${outputTensor.data}.`);
+                let outputs = outputTensor.data;
+                console.log(`model output tensor: ${outputs}.`);
+                ['percent_car','percent_plane'].forEach(function(item, index){
+                    console.log(outputs[index]);
+                    $(`#${item}`).text(outputs[index]);
+                });
             });
 
             //alert('yes');
