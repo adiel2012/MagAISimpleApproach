@@ -38,7 +38,7 @@
     </li>
  </ul>
  <br/>
- git clone https://github.com/adiel2012/MagAISimpleApproach.git<br/>
+ git clone https://github.com/adiel2012/MagAISimpleApproach.git<br/><br/>
  <b>Run XOR python project</b><br/>
  cd ./MagAISimpleApproach/pythonexamples<br/>
  python ./xor.py<br/>
@@ -55,8 +55,6 @@
  <br/><b>Run images classification python project (Keras)</b><br/>
  cd ../pythonexamples<br/>
  python ./kerasimgclassif.py<br/>
-  python ./kerasimgclassif_save_onnx_best_model.py
-<br/>
  
  <br/><b>Run C# images classification project</b><br/>
  cd ../csharpimgclassification<br/>
