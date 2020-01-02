@@ -63,3 +63,9 @@
  dotnet restore<br/>
  dotnet build<br/> 
  dotnet run<br/>
+ 
+<br/><b>Run images classification project in the web</b><br/>
+cd ../nodejsimgclassification<br/>
+npm install<br/>
+node index.js<br/>
+Go to http://localhost:3000<br/>
