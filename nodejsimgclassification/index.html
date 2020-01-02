@@ -10,10 +10,10 @@
         <canvas id="mycanvas" width=224 height=224></canvas>       
   </body>
       <!-- Load ONNX.js -->
-      <script src="https://cdn.jsdelivr.net/npm/onnxjs/dist/onnx.min.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script type="text/javascript" src="/onnx.min.js"></script>
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
       <!-- Code that consume ONNX.js -->
-      <script>    
+      <script type="text/javascript">    
         // https://github.com/Microsoft/onnxjs
   
         function OnModelLoaded()
@@ -23,7 +23,8 @@
         }
 
         function RunClassification()
-        {            
+        {           
+	
             // canvas
             var canvas = document.getElementById('mycanvas');
             var context = canvas.getContext("2d"); 
@@ -65,6 +66,7 @@
             var img = new Image();
 
             fileinput.onchange = function(evt) {
+		
                 var files = evt.target.files; // FileList object
                 var file = files[0];
                 if(file.type.match('image.*')) {
